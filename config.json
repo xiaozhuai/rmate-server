@@ -1,0 +1,11 @@
+{
+    "host": "127.0.0.1",
+    "port": 52698,
+    "editor": {
+        "command": "code",
+        "args": [
+            "-w",
+            "{{file}}"
+        ]
+    }
+}

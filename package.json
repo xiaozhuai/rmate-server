@@ -1,0 +1,28 @@
+{
+    "name": "rmate-server",
+    "version": "1.0.0",
+    "description": "A server that implements the Textmate's 'rmate' feature for any editors",
+    "main": "./rmate-server.js",
+    "bin": {
+        "rmate-server": "./rmate-server.js"
+    },
+    "repository": "https://github.com/xiaozhuai/rmate-server",
+    "author": "xiaozhuai",
+    "license": "MIT",
+    "scripts": {
+        "build-macos": "pkg -t node12-macos-x64 -o dist/macos/rmate-server .",
+        "build-linux": "pkg -t node12-linux-x64 -o dist/linux/rmate-server .",
+        "build-win-x64": "pkg -t node12-win-x64 -o dist/win-x64/rmate-server.exe ."
+    },
+    "pkg": {
+        "scripts": "src/**/*.js"
+    },
+    "dependencies": {
+        "yargs": "^14.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "^12.12.7",
+        "@types/yargs": "^13.0.3",
+        "pkg": "^4.4.0"
+    }
+}
