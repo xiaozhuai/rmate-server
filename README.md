@@ -54,6 +54,22 @@ rmate-server can spawn many editor(almost any) your like, here is some examples,
 }
 ```
 
+### Atom
+
+```json
+{
+    "host": "127.0.0.1",
+    "port": 52698,
+    "editor": {
+        "command": "atom",
+        "args": [
+            "-w",
+            "{{file}}"
+        ]
+    }
+}
+```
+
 ### TextMat
 
 ```json
