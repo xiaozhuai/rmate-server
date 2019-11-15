@@ -24,15 +24,19 @@ A server that implements the Textmate's 'rmate' feature for any editors.
 
 ## Tips
 
-If you want auto create a tunnel whenever you connect to a ssh server, put this into `~/.ssh/config`
-```
-Host *
-RemoteForward 52698 localhost:52698
-```
+1. If you want auto create a tunnel whenever you connect to a ssh server, put this into `~/.ssh/config`
+    ```
+    Host *
+    RemoteForward 52698 localhost:52698
+    ```
 
-And for secure reason, listen loopback interface(127.0.0.1) is better than listen '0.0.0.0'.
+2. For secure reason, `rmate-server` listen loopback interface '127.0.0.1' as default rather than '0.0.0.0'.
 
-**Never run `rmate-server` as root user unless you know what you are doing.**
+3. In WSL(Windows Subsystem Linux) environment, you need run `rmate-server` on windows, and there is no need to create a tunnel.
+
+4. For docker, I'am pretty sure there is a way, I didn't try it yet, if somebody has an experience, please make a pr.
+
+5. **Never run `rmate-server` as root user unless you know what you are doing.**
 
 ## Config Examples
 

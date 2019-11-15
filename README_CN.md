@@ -24,15 +24,19 @@
 
 ## 技巧与说明
 
-如果你想要在每次使用ssh连接到一个服务器时, 自动创建隧道, 可以将下面的配置写入`~/.ssh/config`
-```
-Host *
-RemoteForward 52698 localhost:52698
-```
+1. 如果你想要在每次使用ssh连接到一个服务器时, 自动创建隧道, 可以将下面的配置写入`~/.ssh/config`
+    ```
+    Host *
+    RemoteForward 52698 localhost:52698
+    ```
 
-出于安全考虑, 最好使`rmate-server`监听回环接口`127.0.0.1`而不是`0.0.0.0`
+2. 出于安全考虑, `rmate-server`默认监听回环接口`127.0.0.1`而不是`0.0.0.0`.
 
-**永远不要使用root用户权限运行`rmate-server`, 除非你知道你在做什么**
+3. 在WSL环境下(Windows Subsystem Linux), 你需要在windows上运行`rmate-server`, 且没有必要建立隧道转发.
+
+4. 在docker环境下, 应该也有一只比较简单的方法, 我还没试过, 如果有谁试过了有比较好的方案, 欢迎提pr.
+
+5. **永远不要使用root用户权限运行`rmate-server`, 除非你知道你在做什么.**
 
 ## 配置示例
 
