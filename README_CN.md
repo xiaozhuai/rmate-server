@@ -1,5 +1,7 @@
 # rmate-server
 
+[README in English](README.md)
+
 一个实现了Textmate的rmate远程编辑功能的服务端, 几乎可以用于任何编辑器
 
 ## 安装

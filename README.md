@@ -1,5 +1,7 @@
 # rmate-server
 
+[中文说明](README_CN.md)
+
 A server that implements the Textmate's 'rmate' feature for any editors.
 
 ## Installation
