@@ -74,6 +74,11 @@ module.exports = class RemoteFile {
     }
 
     async spawnEditorProcess() {
+        try {
+            await fsPromises.stat(LOCAL_TMP_DIR);
+        } catch (e) {
+            await fsPromises.mkdir(LOCAL_TMP_DIR);
+        }
         await fsPromises.writeFile(this.localTmpFile, this.data);
 
         this.localTmpFileListener = fs.watch(this.localTmpFile, async (event, filename) => {
