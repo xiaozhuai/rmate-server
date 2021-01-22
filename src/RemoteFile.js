@@ -22,10 +22,11 @@ module.exports = class RemoteFile {
         this.doc = null;
         this.listeners = [];
         this.editorProcess = null;
+        this.sessionTmpDir = path.join(LOCAL_TMP_DIR, `${sha1(Math.random().toString())}`);
         if (this.realPath() !== null) {
-            this.localTmpFile = path.join(LOCAL_TMP_DIR, `${this.hostname()}__${sha1(this.realPath() + Math.random().toString())}`);
+            this.localTmpFile = path.join(this.sessionTmpDir, this.realName());
         } else {
-            this.localTmpFile = path.join(LOCAL_TMP_DIR, `${this.hostname()}__${sha1(this.displayName() + Math.random().toString())}`);
+            this.localTmpFile = path.join(this.sessionTmpDir, `${sha1(this.displayName() + Math.random().toString())}`);
         }
         this.localTmpFileListener = null;
         console.log(`local tmp file: ${this.localTmpFile}`);
@@ -38,18 +39,16 @@ module.exports = class RemoteFile {
         return null;
     }
 
-    hostname() {
-        let displayName = this.displayName();
-        if (displayName === null) return 'unknown_host';
-        return displayName.split(':')[0];
-    }
-
     displayName() {
         return this.get('display-name');
     }
 
     realPath() {
         return this.get('real-path');
+    }
+
+    realName() {
+        return path.basename(this.realPath());
     }
 
     token() {
@@ -79,6 +78,7 @@ module.exports = class RemoteFile {
         } catch (e) {
             await fsPromises.mkdir(LOCAL_TMP_DIR);
         }
+        await fsPromises.mkdir(this.sessionTmpDir, {recursive: true});
         await fsPromises.writeFile(this.localTmpFile, this.data);
 
         this.localTmpFileListener = fs.watch(this.localTmpFile, async (event, filename) => {
@@ -120,6 +120,7 @@ module.exports = class RemoteFile {
                 this.localTmpFileListener.close();
                 try {
                     await fsPromises.unlink(this.localTmpFile);
+                    await fsPromises.unlink(this.sessionTmpDir);
                 } catch (e) {
                     // On windows, cannot remove a opened file, just ignore it, tmp dir will be clear when server down or next up
                 }

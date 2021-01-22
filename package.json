@@ -1,6 +1,6 @@
 {
     "name": "rmate-server",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "A server that implements the Textmate's 'rmate' feature for any editors",
     "main": "./rmate-server.js",
     "bin": {
@@ -18,6 +18,7 @@
         "scripts": "src/**/*.js"
     },
     "dependencies": {
+        "rimraf": "^3.0.2",
         "yargs": "^14.2.0"
     },
     "devDependencies": {
